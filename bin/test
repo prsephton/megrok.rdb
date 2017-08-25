@@ -1,0 +1,52 @@
+#!/home/paul/megrok.rdb-0.12/bin/python
+
+import sys
+sys.path[0:0] = [
+  '/home/paul/megrok.rdb-0.12/src',
+  '/home/paul/.buildout/eggs/zope.testrunner-4.4.9-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.interface-4.2.0-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/zope.exceptions-4.0.8-py2.7.egg',
+  '/home/paul/.buildout/eggs/six-1.10.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/setuptools-19.2-py2.7.egg',
+  '/home/paul/.buildout/eggs/z3c.saconfig-0.14-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.sqlalchemy-0.7.7-py2.7.egg',
+  '/home/paul/.buildout/eggs/SQLAlchemy-1.1.13-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/martian-0.15-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.container-4.1.0-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/grokcore.component-2.7-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.location-4.0.3-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.event-4.2.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.component-4.2.2-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.schema-4.4.2-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.configuration-4.0.3-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.security-4.0.3-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/zope.hookable-4.0.4-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/transaction-1.4.4-py2.7.egg',
+  '/home/paul/.buildout/eggs/persistent-4.1.1-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/BTrees-4.1.4-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/zope.proxy-4.2.0-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/zope.publisher-4.2.1-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.traversing-4.0.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.size-4.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.filerepresentation-4.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.i18nmessageid-4.0.3-py2.7-linux-x86_64.egg',
+  '/home/paul/.buildout/eggs/zope.lifecycleevent-4.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.dottedname-4.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.testing-4.2.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.i18n-4.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.contenttype-4.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/zope.browser-2.1.0-py2.7.egg',
+  '/home/paul/.buildout/eggs/pytz-2015.7-py2.7.egg',
+  ]
+
+import os
+sys.argv[0] = os.path.abspath(sys.argv[0])
+os.chdir('/home/paul/megrok.rdb-0.12/parts/test')
+
+
+import zope.testrunner
+
+if __name__ == '__main__':
+    sys.exit(zope.testrunner.run((['--tests-pattern', '^f?tests$', '-v']) + [
+        '--test-path', '/home/paul/megrok.rdb-0.12/src',
+        ]))

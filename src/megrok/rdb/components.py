@@ -15,7 +15,7 @@ class Model(Context):
 
     __parent__ = None
     __name__ = None
-    
+
     def __init__(self, **kwargs):
         # XXX can we use the __init__ that sqlalchemy.ext.declarative sets up?
         for k in kwargs:
@@ -34,7 +34,7 @@ class LocatedModel(Model):
     @property
     def __name__(self):
         return
-    
+
 def default_keyfunc(node):
     primary_keys = node.__table__.primary_key.keys()
     if len(primary_keys) == 1:
@@ -48,7 +48,7 @@ class Container(MappedCollection):
 
     __parent__ = None
     __name__ = None
-    
+
     def __init__(self, *args, **kw):
         rdb_key = directive.key.bind().get(self)
         if rdb_key:
@@ -59,7 +59,7 @@ class Container(MappedCollection):
             keyfunc = default_keyfunc
         MappedCollection.__init__(self, keyfunc=keyfunc)
 
-    @collection.on_link
+    @collection.link
     def on_link(self, adapter):
         if adapter is not None:
             self.__parent__ = adapter.owner_state.obj()
@@ -68,7 +68,7 @@ class Container(MappedCollection):
             # unlinking collection from parent
             self.__parent__ = None
             self.__name__ = None
-            
+
     def __setitem__(self, key, item):
         key = unicode(key)
         self._receive(item, key)
@@ -78,7 +78,7 @@ class Container(MappedCollection):
         key = unicode(key)
         self._release(self[key])
         MappedCollection.__delitem__(self, key)
-        
+
     def _receive(self, item, key):
         item.__name__ = key
         item.__parent__ = self
@@ -86,7 +86,7 @@ class Container(MappedCollection):
     def _release(self, item):
         del item.__name__
         del item.__parent__
-    
+
     @collection.internally_instrumented
     @collection.appender
     def set(self, value, _sa_initiator=None):
@@ -125,7 +125,7 @@ class QueryContainer(object):
         result.__name__ = key
         return result
 
-    def dbget(self, key):        
+    def dbget(self, key):
         return self.query().get(key)
 
     def get(self, key, default=None):
@@ -133,7 +133,7 @@ class QueryContainer(object):
             return self[key]
         except KeyError:
             return default
-    
+
     def __contains__(self, key):
         try:
             self[key]
@@ -154,7 +154,7 @@ class QueryContainer(object):
     def __iter__(self):
         for key in self.keys():
             yield key
-    
+
     def values(self):
         result = []
         for v in self.query().all():
@@ -163,7 +163,7 @@ class QueryContainer(object):
             converted.__name__ = self.keyfunc(v)
             result.append(converted)
         return result
-        
+
     def items(self):
         result = []
         for v in self.query().all():
@@ -175,7 +175,7 @@ class QueryContainer(object):
 
     def __len__(self):
         return self.query().count()
-    
+
     def keyfunc(self, value):
         """Get the key for this value.
         """
